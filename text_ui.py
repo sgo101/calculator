@@ -5,12 +5,12 @@ import calc
 
 
 
-
-
-def quit_program(*args):
-    print('See you later!')
-    sys.exit()
-
+# get value from user and return an integer number
+def get_number():
+    try:
+        return int(input("Enter an integer number: "))
+    except ValueError:
+        return None
 
 def menu():
     items = [
@@ -33,7 +33,6 @@ def main():
         "2": calc.minus,
         "3": calc.mul,
         "4": calc.div,
-        "5": quit_program
     }
     
     op_symbols = {
@@ -47,13 +46,15 @@ def main():
         os.system("clear")
         response = menu()
         if operations.get(response) is not None:
-            if response == '5':
-                operations.get(response)()
-
-            num1 = int(input("Enter number one: "))
-            num2 = int(input("Enter number two: "))
-            res = operations[response](num1, num2)
-            print(f"{num1} {op_symbols[response]} {num2} = {res}")
+            num1 = get_number()
+            num2 = get_number()
+            if num1 is not None  and num2 is not None:
+                res = operations[response](num1, num2)
+                print(f"{num1} {op_symbols[response]} {num2} = {res}")
+            else:
+                print("Invalid number. You should enter and integer number.")
+        elif response == '5':
+            sys.exit()
         else:
             print("Invalid choose!")
             
