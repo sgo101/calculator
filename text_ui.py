@@ -8,6 +8,7 @@ import calc
 
 
 def quit_program(*args):
+    print('See you later!')
     sys.exit()
 
 
@@ -46,6 +47,9 @@ def main():
         os.system("clear")
         response = menu()
         if operations.get(response) is not None:
+            if response == '5':
+                operations.get(response)()
+
             num1 = int(input("Enter number one: "))
             num2 = int(input("Enter number two: "))
             res = operations[response](num1, num2)
